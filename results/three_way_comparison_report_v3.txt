@@ -1,0 +1,230 @@
+================================================================================
+PPC AD CLICK FRAUD DETECTION - THREE-WAY COMPARISON REPORT
+================================================================================
+Generated: 2026-04-08 14:58:41
+Test Set Size: 5 models
+
+CURRENT PERFORMANCE (v3 - ADVANCED TRAINING)
+--------------------------------------------------------------------------------
+
+DECISION TREE
+----------------------------------------
+Threshold: 0.500
+CV F1-Score: 0.6733 +/- 0.3488
+
+Metric               Value
+-------------------------
+Accuracy            0.9887
+Precision           0.1301
+Recall              0.7111
+F1-Score            0.2199
+ROC-AUC             0.8822
+PR-AUC              0.0770
+
+Confusion Matrix Details:
+  True Positives (TP): 32
+  False Positives (FP): 214
+  True Negatives (TN): 19,741
+  False Negatives (FN): 13
+
+RANDOM FOREST
+----------------------------------------
+Threshold: 0.750
+CV F1-Score: 0.7293 +/- 0.2770
+
+Metric               Value
+-------------------------
+Accuracy            0.9979
+Precision           0.6000
+Recall              0.2000
+F1-Score            0.3000
+ROC-AUC             0.9779
+PR-AUC              0.3705
+
+Confusion Matrix Details:
+  True Positives (TP): 9
+  False Positives (FP): 6
+  True Negatives (TN): 19,949
+  False Negatives (FN): 36
+
+XGBOOST
+----------------------------------------
+Threshold: 0.800
+CV F1-Score: 0.5904 +/- 0.3385
+
+Metric               Value
+-------------------------
+Accuracy            0.9971
+Precision           0.3846
+Recall              0.4444
+F1-Score            0.4124
+ROC-AUC             0.9688
+PR-AUC              0.3549
+
+Confusion Matrix Details:
+  True Positives (TP): 20
+  False Positives (FP): 32
+  True Negatives (TN): 19,923
+  False Negatives (FN): 25
+
+LIGHTGBM
+----------------------------------------
+Threshold: 0.800
+CV F1-Score: 0.7254 +/- 0.2799
+
+Metric               Value
+-------------------------
+Accuracy            0.9969
+Precision           0.3393
+Recall              0.4222
+F1-Score            0.3762
+ROC-AUC             0.9717
+PR-AUC              0.3503
+
+Confusion Matrix Details:
+  True Positives (TP): 19
+  False Positives (FP): 37
+  True Negatives (TN): 19,918
+  False Negatives (FN): 26
+
+LOGISTIC REGRESSION
+----------------------------------------
+Threshold: 0.500
+CV F1-Score: 0.5786 +/- 0.4523
+
+Metric               Value
+-------------------------
+Accuracy            0.8492
+Precision           0.0144
+Recall              0.9778
+F1-Score            0.0284
+ROC-AUC             0.9727
+PR-AUC              0.1083
+
+Confusion Matrix Details:
+  True Positives (TP): 44
+  False Positives (FP): 3,015
+  True Negatives (TN): 16,940
+  False Negatives (FN): 1
+
+================================================================================
+THREE-WAY PERFORMANCE COMPARISON
+================================================================================
+
+DECISION TREE
+----------------------------------------
+Version      F1-Score  Precision     Recall    ROC-AUC
+--------------------------------------------------
+v1             0.9833 0.9863835796056282 0.980155349536457     0.9944
+v2             0.0836     0.0483     0.3111     0.8207
+v3             0.2199     0.1301     0.7111     0.8822
+
+Improvement from v2 to v3:
+  F1-Score: +0.1363
+  Precision: +0.0818
+  Recall: +0.4000
+
+RANDOM FOREST
+----------------------------------------
+Version      F1-Score  Precision     Recall    ROC-AUC
+--------------------------------------------------
+v1             0.9990 0.9983983182341458 0.9995990979704334     1.0000
+v2             0.2651     0.1818     0.4889     0.9737
+v3             0.3000     0.6000     0.2000     0.9779
+
+Improvement from v2 to v3:
+  F1-Score: +0.0349
+  Precision: +0.4182
+  Recall: -0.2889
+
+XGBOOST
+----------------------------------------
+Version      F1-Score  Precision     Recall    ROC-AUC
+--------------------------------------------------
+v1             0.9989 0.9983981578815638 0.9994988724630418     1.0000
+v2             0.2632     0.1724     0.5556     0.9701
+v3             0.4124     0.3846     0.4444     0.9688
+
+Improvement from v2 to v3:
+  F1-Score: +0.1492
+  Precision: +0.2122
+  Recall: -0.1111
+
+LIGHTGBM
+----------------------------------------
+Version      F1-Score  Precision     Recall    ROC-AUC
+--------------------------------------------------
+v1             0.9978 0.9963527354484136 0.9993485342019544     0.9999
+v2             0.3333     0.2342     0.5778     0.9547
+v3             0.3762     0.3393     0.4222     0.9717
+
+Improvement from v2 to v3:
+  F1-Score: +0.0429
+  Precision: +0.1051
+  Recall: -0.1556
+
+LOGISTIC REGRESSION
+----------------------------------------
+Version      F1-Score  Precision     Recall    ROC-AUC
+--------------------------------------------------
+v1             0.9049 0.8987936319588649 0.9109997494362316     0.9528
+v2             0.0288     0.0146     0.9556     0.9676
+v3             0.0284     0.0144     0.9778     0.9727
+
+Improvement from v2 to v3:
+  F1-Score: -0.0005
+  Precision: -0.0003
+  Recall: +0.0222
+
+================================================================================
+PERFORMANCE EVOLUTION ANALYSIS
+================================================================================
+
+V1 -> V2: Eliminating Data Leakage
+----------------------------------------
+Key changes:
+1. Time-based split (80/20 chronological)
+2. Feature engineering using training data only
+3. No information from test set used in training
+4. SMOTE applied only to training data
+
+Result: Dramatic performance drop (expected)
+  - Shows previous results were overoptimistic
+  - Establishes realistic baseline
+
+V2 -> V3: Advanced Techniques for Improvement
+----------------------------------------
+Key improvements:
+1. Threshold tuning for optimal precision-recall tradeoff
+2. Cost-sensitive learning with sophisticated class weights
+3. Temporal cross-validation for time-series stability
+4. Advanced feature engineering (rolling windows, entropy)
+5. Regularization and hyperparameter optimization
+
+Goal: Achieve F1-Score >= 0.5 while maintaining validity
+
+================================================================================
+TARGET ACHIEVEMENT ANALYSIS
+================================================================================
+
+Best Model: XGBoost
+Best F1-Score: 0.4124
+Target: F1-Score >= 0.5
+
+[-] TARGET NOT ACHIEVED
+  Current best F1-Score: 0.4124
+  Needed improvement: 0.0876
+  Improvement over v2: 0.0791
+
+================================================================================
+RECOMMENDATIONS FOR FURTHER IMPROVEMENT
+================================================================================
+
+If target not achieved, consider:
+1. Ensemble methods (stacking, voting, blending)
+2. More sophisticated feature engineering
+3. Deep learning approaches (LSTM for time series)
+4. Anomaly detection techniques
+5. External data sources (IP reputation, device fingerprinting)
+6. More aggressive threshold tuning
+7. Cost matrix optimization for business requirements

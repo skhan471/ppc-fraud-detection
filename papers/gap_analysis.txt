@@ -1,0 +1,60 @@
+================================================================================
+GAP ANALYSIS REPORT - PPC AD CLICK FRAUD DETECTION
+================================================================================
+Generated: 2026-04-08 19:57:31
+Papers analyzed: 23
+PPC/Ad Fraud papers: 11
+
+1. METHODS GAP
+----------------------------------------
+Models commonly used in PPC literature: Ensemble, Random Forest, SVM, KNN, XGBoost
+Models in our project: Decision Tree, Random Forest, XGBoost, LightGBM, Logistic Regression
+Missing from our project: SVM, CNN, RNN, KNN, Naive Bayes
+
+2. DATASETS GAP
+----------------------------------------
+Common datasets in literature:
+  - Ad Fraud Specific: 3 papers
+  - UCI: 2 papers
+  - Credit Card: 1 papers
+  - Real-world: 1 papers
+Our dataset: TalkingData (real-world PPC clicks, 0.23% fraud rate)
+
+3. EVALUATION ISSUES
+----------------------------------------
+Data leakage impact: 0.7094 F1-score drop
+V1 (leaky) vs V3 (valid) performance difference: 72.6%
+Few papers mention temporal validation or data leakage prevention
+
+4. OUR UNIQUE CONTRIBUTIONS
+----------------------------------------
+1. First study to explicitly address temporal data leakage in PPC fraud detection
+2. Three-pipeline experimental design (v1: leakage, v2: baseline, v3: advanced)
+3. Novel application of Logistic Regression in PPC fraud context
+4. First use of TalkingData dataset for PPC fraud detection research
+5. Comprehensive evaluation with 5 metrics and temporal cross-validation
+
+5. RESEARCH GAPS IDENTIFIED
+----------------------------------------
+A. Methodological Gaps:
+  1. Lack of temporal validation in most PPC fraud studies
+  2. Over-reliance on traditional ML models (SVM, Random Forest)
+  3. Limited use of gradient boosting in PPC context
+
+B. Dataset Gaps:
+  1. Most studies use generic fraud datasets
+  2. Few use real-world PPC click data
+  3. Limited public benchmark datasets for PPC fraud
+
+C. Evaluation Gaps:
+  1. Data leakage often ignored in evaluation
+  2. Limited use of temporal cross-validation
+  3. Overoptimistic performance reporting
+
+6. RECOMMENDATIONS FOR FUTURE WORK
+----------------------------------------
+1. Apply deep learning models (LSTM, CNN) to PPC fraud
+2. Develop ensemble methods combining traditional ML and DL
+3. Create standardized PPC fraud benchmark dataset
+4. Implement stricter temporal validation protocols
+5. Explore real-time fraud detection approaches

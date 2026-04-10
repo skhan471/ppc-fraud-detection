@@ -1,0 +1,47 @@
+PPC AD CLICK FRAUD DETECTION - DATASET EXPLORATION REPORT
+================================================================================
+
+Dataset: data/train_sample.csv
+Analysis Date: 2026-04-08 09:55:38
+
+1. SHAPE OF DATASET:
+   Rows: 100,000
+   Columns: 8
+
+2. COLUMN NAMES:
+    1. ip
+    2. app
+    3. device
+    4. os
+    5. channel
+    6. click_time
+    7. attributed_time
+    8. is_attributed
+
+3. COLUMN ANALYSIS:
+   Column               Type            Missing    Missing %  Unique    
+   -------------------- --------------- ---------- ---------- ----------
+   ip                   numeric         0          0.0        34,857    
+   app                  numeric         0          0.0        161       
+   device               numeric         0          0.0        100       
+   os                   numeric         0          0.0        130       
+   channel              numeric         0          0.0        161       
+   click_time           datetime        0          0.0        80,350    
+   attributed_time      categorical/text 99,773     99.8       228       
+   is_attributed        numeric         0          0.0        2         
+
+4. CLASS DISTRIBUTION OF TARGET COLUMN (is_attributed):
+   Class 0 (Not Attributed): 99,773 rows (99.77%)
+   Class 1 (Attributed): 227 rows (0.23%)
+   Class Imbalance Ratio (0:1): 439.53:1
+
+5. SAMPLE OF FIRST 5 ROWS:
+   ip | app | device | os | channel | click_time | attributed_time | is_attributed
+   1: 87540 | 12 | 1 | 13 | 497 | 2017-11-07 09:30:38 |  | 0
+   2: 105560 | 25 | 1 | 17 | 259 | 2017-11-07 13:40:27 |  | 0
+   3: 101424 | 12 | 1 | 19 | 212 | 2017-11-07 18:05:24 |  | 0
+   4: 94584 | 13 | 1 | 13 | 477 | 2017-11-07 04:58:08 |  | 0
+   5: 68413 | 12 | 1 | 1 | 178 | 2017-11-09 09:00:09 |  | 0
+
+================================================================================
+END OF REPORT

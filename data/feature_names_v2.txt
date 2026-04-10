@@ -1,0 +1,16 @@
+ip
+app
+device
+os
+channel
+click_hour
+click_day
+click_minute
+click_second
+click_dayofmonth
+ip_frequency
+app_frequency
+device_frequency
+channel_frequency
+ip_app_frequency
+ip_device_frequency

@@ -1,0 +1,24 @@
+﻿# Large data files
+data/train.csv
+data/train_sample.csv
+data/X_train.csv
+data/X_test.csv
+data/y_train.csv
+data/y_test.csv
+data/*.csv
+
+# Model files (too large)
+models/*.pkl
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.log
+error*.log
+error_eval.log
+
+# Environment
+.env

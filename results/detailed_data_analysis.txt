@@ -1,0 +1,39 @@
+PPC AD CLICK FRAUD DETECTION - DETAILED DATA ANALYSIS
+================================================================================
+
+DATASET SUMMARY
+----------------------------------------
+Total samples: 100,000
+Features: 8
+Target variable: 'is_attributed' (1=fraud/attributed, 0=legitimate)
+
+FEATURE DESCRIPTIONS
+----------------------------------------
+1. ip
+2. app
+3. device
+4. os
+5. channel
+6. click_time
+7. attributed_time
+8. is_attributed
+
+CLASS DISTRIBUTION
+----------------------------------------
+Class 0 (Legitimate): 99,773 (99.7730%)
+Class 1 (Fraud/Attributed): 227 (0.2270%)
+Imbalance Ratio: 439.53:1
+
+MISSING VALUES
+----------------------------------------
+attributed_time: 99,773 missing (99.77%)
+
+RECOMMENDATIONS FOR MODELING
+----------------------------------------
+1. Handle extreme class imbalance (439:1 ratio)
+2. Encode categorical features (ip, app, device, os, channel)
+3. Engineer time-based features from click_time
+4. Consider attributed_time as target for conversion time prediction
+5. Use time-based train/test split to prevent leakage
+6. Focus on precision-recall metrics, not accuracy
+7. Consider anomaly detection approaches for fraud

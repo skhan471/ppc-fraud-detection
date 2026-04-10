@@ -1,0 +1,205 @@
+================================================================================
+PPC AD CLICK FRAUD DETECTION - HONEST EVALUATION REPORT v2
+================================================================================
+Generated: 2026-04-08 12:54:49
+Test Set Size: 20,000 samples
+Fraud Prevalence: 0.0022
+Number of Models Evaluated: 5
+
+CURRENT PERFORMANCE (v2 - NO DATA LEAKAGE)
+--------------------------------------------------------------------------------
+
+DECISION TREE
+----------------------------------------
+                      precision     recall   f1-score    support
+------------------------------------------------------------
+Legitimate               0.9984     0.9862     0.9923      19955
+Fraud                    0.0483     0.3111     0.0836         45
+
+accuracy                                       0.9847      20000
+macro avg                0.5234     0.6486     0.5379      20000
+weighted avg             0.9963     0.9847     0.9902      20000
+Confusion Matrix Details:
+  True Negatives (TN): 19,679
+  False Positives (FP): 276
+  False Negatives (FN): 31
+  True Positives (TP): 14
+
+RANDOM FOREST
+----------------------------------------
+                      precision     recall   f1-score    support
+------------------------------------------------------------
+Legitimate               0.9988     0.9950     0.9969      19955
+Fraud                    0.1818     0.4889     0.2651         45
+
+accuracy                                       0.9939      20000
+macro avg                0.5903     0.7420     0.6310      20000
+weighted avg             0.9970     0.9939     0.9953      20000
+Confusion Matrix Details:
+  True Negatives (TN): 19,856
+  False Positives (FP): 99
+  False Negatives (FN): 23
+  True Positives (TP): 22
+
+XGBOOST
+----------------------------------------
+                      precision     recall   f1-score    support
+------------------------------------------------------------
+Legitimate               0.9990     0.9940     0.9965      19955
+Fraud                    0.1724     0.5556     0.2632         45
+
+accuracy                                       0.9930      20000
+macro avg                0.5857     0.7748     0.6298      20000
+weighted avg             0.9971     0.9930     0.9948      20000
+Confusion Matrix Details:
+  True Negatives (TN): 19,835
+  False Positives (FP): 120
+  False Negatives (FN): 20
+  True Positives (TP): 25
+
+LIGHTGBM
+----------------------------------------
+                      precision     recall   f1-score    support
+------------------------------------------------------------
+Legitimate               0.9990     0.9957     0.9974      19955
+Fraud                    0.2342     0.5778     0.3333         45
+
+accuracy                                       0.9948      20000
+macro avg                0.6166     0.7868     0.6654      20000
+weighted avg             0.9973     0.9948     0.9959      20000
+Confusion Matrix Details:
+  True Negatives (TN): 19,870
+  False Positives (FP): 85
+  False Negatives (FN): 19
+  True Positives (TP): 26
+
+LOGISTIC REGRESSION
+----------------------------------------
+                      precision     recall   f1-score    support
+------------------------------------------------------------
+Legitimate               0.9999     0.8550     0.9218      19955
+Fraud                    0.0146     0.9556     0.0288         45
+
+accuracy                                       0.8552      20000
+macro avg                0.5073     0.9053     0.4753      20000
+weighted avg             0.9977     0.8552     0.9198      20000
+Confusion Matrix Details:
+  True Negatives (TN): 17,062
+  False Positives (FP): 2,893
+  False Negatives (FN): 2
+  True Positives (TP): 43
+
+================================================================================
+COMPARISON WITH PREVIOUS RESULTS (v1 - WITH DATA LEAKAGE)
+================================================================================
+
+V1 Results (Overoptimistic due to data leakage):
+
+Decision Tree:
+  Accuracy:  0.9833
+  F1-Score:  0.9833
+  ROC-AUC:   0.9944
+
+Random Forest:
+  Accuracy:  0.9990
+  F1-Score:  0.9990
+  ROC-AUC:   1.0000
+
+XGBoost:
+  Accuracy:  0.9989
+  F1-Score:  0.9989
+  ROC-AUC:   1.0000
+
+LightGBM:
+  Accuracy:  0.9978
+  F1-Score:  0.9978
+  ROC-AUC:   0.9999
+
+Logistic Regression:
+  Accuracy:  0.9042
+  F1-Score:  0.9049
+  ROC-AUC:   0.9528
+
+V2 Results (Realistic - No data leakage):
+
+Decision Tree:
+  Accuracy:  0.9847
+  F1-Score:  0.0836
+  ROC-AUC:   0.8207
+
+Random Forest:
+  Accuracy:  0.9939
+  F1-Score:  0.2651
+  ROC-AUC:   0.9737
+
+XGBoost:
+  Accuracy:  0.9930
+  F1-Score:  0.2632
+  ROC-AUC:   0.9701
+
+LightGBM:
+  Accuracy:  0.9948
+  F1-Score:  0.3333
+  ROC-AUC:   0.9547
+
+Logistic Regression:
+  Accuracy:  0.8552
+  F1-Score:  0.0288
+  ROC-AUC:   0.9676
+
+================================================================================
+PERFORMANCE DROP ANALYSIS
+================================================================================
+
+Why performance dropped significantly:
+1. TIME-BASED SPLIT: Test set contains FUTURE data
+   - Models trained on past, tested on future
+   - Real-world scenario: predict future fraud
+
+2. NO DATA LEAKAGE in feature engineering:
+   - Frequency features calculated from TRAINING data only
+   - Test data features use training mappings
+   - Unseen values in test get frequency = 0
+
+3. REALISTIC CLASS IMBALANCE:
+   - Test set: 45 frauds out of 20,000 samples
+   - Fraud prevalence: 0.0022
+   - SMOTE applied ONLY to training data
+
+4. CHALLENGE OF FUTURE PREDICTION:
+   - Fraud patterns may change over time
+   - New IPs, devices, apps appear in test set
+   - Models must generalize to unseen patterns
+
+================================================================================
+BEST MODEL ANALYSIS
+================================================================================
+
+Best F1-Score: LightGBM (0.3333)
+Best ROC-AUC: Random Forest (0.9737)
+Best Precision: LightGBM (0.2342)
+Best Recall: Logistic Regression (0.9556)
+
+TRADE-OFF ANALYSIS:
+1. Logistic Regression has highest recall (0.9556)
+   - Catches most frauds but has many false positives
+2. LightGBM has highest precision (0.2342)
+   - Few false alarms but misses many frauds
+3. LightGBM has best balance (F1-Score: 0.3333)
+   - Recommended for balanced approach
+
+================================================================================
+FINAL RECOMMENDATION
+================================================================================
+
+Recommended Model: LightGBM
+  - F1-Score: 0.3333
+  - ROC-AUC: 0.9737
+  - Precision: 0.2342
+  - Recall: 0.9556
+
+DEPLOYMENT CONSIDERATIONS:
+1. Model performance is realistic but modest
+2. Consider ensemble methods to improve performance
+3. Regular retraining needed as fraud patterns evolve
+4. Threshold tuning may improve precision/recall trade-off

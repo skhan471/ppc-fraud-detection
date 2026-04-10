@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python analyze_dataset.py)",
+      "Bash(python -c \"import pandas as pd; print\\(''Pandas version:'', pd.__version__\\)\")",
+      "Bash(python -c \"print\\(''Python is working''\\)\")",
+      "Bash(python simple_analyze.py)",
+      "Bash(python detailed_analysis.py)",
+      "Bash(cd:*)",
+      "Bash(python -c \"try: from imblearn.over_sampling import SMOTE; print\\(''imbalanced-learn: OK''\\); except ImportError as e: print\\(f''imbalanced-learn: {e}''\\)\")",
+      "Bash(python -c \"import sklearn; print\\(f''scikit-learn version: {sklearn.__version__}''\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python verify_preprocessing.py)",
+      "Bash(python -c \"print\\(''Test''\\)\")"
+    ]
+  }
+}
